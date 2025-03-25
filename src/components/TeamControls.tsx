@@ -43,7 +43,7 @@ const TeamControls: React.FC<TeamControlsProps> = ({
         <h2 className="card-header">Team Settings</h2>
         
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-          <div className="flex-1 w-full sm:w-auto">
+          <div className="w-full sm:w-40">
             <label htmlFor="teamCount" className="block text-sm font-medium text-muted-foreground mb-2">
               Number of Teams
             </label>
@@ -59,7 +59,7 @@ const TeamControls: React.FC<TeamControlsProps> = ({
             />
           </div>
           
-          <div className="text-sm text-muted-foreground mt-2 sm:mt-8">
+          <div className="text-sm text-muted-foreground mt-2 sm:mt-8 flex-1">
             {namesCount > 0 ? (
               <span>
                 Creating {teamCount} teams with 
