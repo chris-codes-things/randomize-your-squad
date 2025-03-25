@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import { Coin, RotateCw } from 'lucide-react';
+import { Coins, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CoinFlipper: React.FC = () => {
@@ -46,7 +46,7 @@ const CoinFlipper: React.FC = () => {
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center mb-3">
-              <Coin className="mr-2 h-5 w-5 text-primary" />
+              <Coins className="mr-2 h-5 w-5 text-primary" />
               <h2 className="card-header !mb-0">Coin Flipper</h2>
             </div>
             

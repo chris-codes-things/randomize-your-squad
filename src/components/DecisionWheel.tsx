@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
-import { RadialFilter, RotateCw } from 'lucide-react';
+import { CircleDashed, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TeamInput from './TeamInput';
 
@@ -173,7 +173,7 @@ const DecisionWheel: React.FC = () => {
         <div className="w-full lg:w-1/2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="glass rounded-2xl p-6 h-full flex flex-col">
             <div className="flex items-center mb-4">
-              <RadialFilter className="mr-2 h-5 w-5 text-primary" />
+              <CircleDashed className="mr-2 h-5 w-5 text-primary" />
               <h2 className="card-header !mb-0">Decision Wheel</h2>
             </div>
             

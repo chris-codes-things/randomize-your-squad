@@ -3,7 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import NamePicker from '../components/NamePicker';
-import { Users, User, Dice3, Coin, RadialFilter } from 'lucide-react';
+import { Users, User, Dice3, Coins, CircleDashed } from 'lucide-react';
 
 const NamePickerPage = () => {
   return (
@@ -45,14 +45,14 @@ const NamePickerPage = () => {
             to="/coin-flip" 
             className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
-            <Coin size={18} />
+            <Coins size={18} />
             <span>Coin Flip</span>
           </Link>
           <Link 
             to="/decision-wheel" 
             className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
-            <RadialFilter size={18} />
+            <CircleDashed size={18} />
             <span>Decision Wheel</span>
           </Link>
         </nav>
