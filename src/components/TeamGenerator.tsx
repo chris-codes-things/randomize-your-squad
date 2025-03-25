@@ -14,13 +14,21 @@ const TeamGenerator: React.FC = () => {
 
   // Parse names input into array
   useEffect(() => {
-    // Split by new lines, commas, or spaces, and filter out empty entries
-    const parsed = names
+    // First split by new lines and commas
+    const splitByLineAndComma = names
       .split(/[\n,]+/)
-      .map(name => name.trim())
-      .filter(name => name !== '');
+      .map(part => part.trim())
+      .filter(Boolean);
     
-    setNamesArray(parsed);
+    // Then process each chunk to split by spaces if needed
+    const result: string[] = [];
+    splitByLineAndComma.forEach(chunk => {
+      // If the chunk has multiple words separated by spaces, split it
+      const words = chunk.split(/\s+/).filter(Boolean);
+      result.push(...words);
+    });
+    
+    setNamesArray(result);
   }, [names]);
 
   const randomizeTeams = () => {

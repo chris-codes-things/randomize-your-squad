@@ -17,6 +17,26 @@ const TeamControls: React.FC<TeamControlsProps> = ({
   isDisabled,
   namesCount
 }) => {
+  const handleTeamCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    
+    // Allow empty input (will be handled as 2 on blur)
+    if (value === '') {
+      setTeamCount(2);
+      return;
+    }
+    
+    // Parse the input value
+    const parsedValue = parseInt(value);
+    
+    // Only update if it's a valid number
+    if (!isNaN(parsedValue)) {
+      // Enforce min/max constraints
+      const constrainedValue = Math.max(2, Math.min(namesCount || 2, parsedValue));
+      setTeamCount(constrainedValue);
+    }
+  };
+
   return (
     <div className="w-full animate-slide-up" style={{ animationDelay: '0.2s' }}>
       <div className="glass rounded-2xl p-6">
@@ -33,7 +53,7 @@ const TeamControls: React.FC<TeamControlsProps> = ({
               min="2"
               max={Math.max(2, namesCount)}
               value={teamCount}
-              onChange={(e) => setTeamCount(Math.max(2, Math.min(namesCount, parseInt(e.target.value) || 2)))}
+              onChange={handleTeamCountChange}
               className="w-full p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
               aria-label="Number of teams"
             />
@@ -42,9 +62,10 @@ const TeamControls: React.FC<TeamControlsProps> = ({
           <div className="text-sm text-muted-foreground mt-2 sm:mt-8">
             {namesCount > 0 ? (
               <span>
-                Creating {teamCount} teams with approximately {' '}
-                {namesCount > 0 ? Math.ceil(namesCount / teamCount) : 0} - {' '}
-                {namesCount > 0 ? Math.floor(namesCount / teamCount) + 1 : 0} people per team
+                Creating {teamCount} teams with 
+                {namesCount % teamCount === 0 
+                  ? ` ${namesCount / teamCount} people per team` 
+                  : ` approximately ${Math.floor(namesCount / teamCount)} - ${Math.ceil(namesCount / teamCount)} people per team`}
               </span>
             ) : (
               <span>Add names to start generating teams</span>
