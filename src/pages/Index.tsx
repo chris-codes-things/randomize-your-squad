@@ -1,12 +1,16 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import TeamGenerator from '../components/TeamGenerator';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-start py-6">
+      <Helmet>
+        <title>Team Randomizer - Easy Random Team & Group Generator Tool</title>
+        <meta name="description" content="Free random team generator tool. Quickly create random groups from a list of names for school, work, or events. Simple, fast, and mobile-friendly." />
+      </Helmet>
+      <TeamGenerator />
     </div>
   );
 };
