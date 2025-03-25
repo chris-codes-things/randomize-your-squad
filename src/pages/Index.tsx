@@ -3,7 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import TeamGenerator from '../components/TeamGenerator';
-import { Users, User, Dice3 } from 'lucide-react';
+import { Users, User, Dice3, Coin, RadialFilter } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -14,6 +14,11 @@ const Index = () => {
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-primary">Team Randomizer</h1>
+          <p className="text-muted-foreground mt-2">Create random teams from your list of names</p>
+        </div>
+      
         <nav className="w-full mb-8 glass rounded-xl p-4 flex flex-wrap justify-center gap-4">
           <Link 
             to="/" 
@@ -35,6 +40,20 @@ const Index = () => {
           >
             <Dice3 size={18} />
             <span>Dice Roller</span>
+          </Link>
+          <Link 
+            to="/coin-flip" 
+            className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
+          >
+            <Coin size={18} />
+            <span>Coin Flip</span>
+          </Link>
+          <Link 
+            to="/decision-wheel" 
+            className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
+          >
+            <RadialFilter size={18} />
+            <span>Decision Wheel</span>
           </Link>
         </nav>
       </div>

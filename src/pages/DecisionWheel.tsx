@@ -2,21 +2,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import DiceRoller from '../components/DiceRoller';
+import DecisionWheel from '../components/DecisionWheel';
 import { Users, User, Dice3, Coin, RadialFilter } from 'lucide-react';
 
-const DiceRollerPage = () => {
+const DecisionWheelPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start py-6">
       <Helmet>
-        <title>Online Dice Roller - Free Virtual Dice Rolling Tool</title>
-        <meta name="description" content="Free online dice roller tool. Roll virtual dice for board games, RPGs, or decision making. Roll up to 10 dice at once. Simple, free, and mobile-friendly." />
+        <title>Decision Wheel - Free Online Random Choice Picker Tool</title>
+        <meta name="description" content="Free decision wheel tool. Randomly select from your options for fair decision making. Simple, free, and mobile-friendly wheel of fortune style picker." />
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primary">Virtual Dice Roller</h1>
-          <p className="text-muted-foreground mt-2">Roll virtual dice for games, decisions, or random numbers</p>
+          <h1 className="text-3xl font-bold text-primary">Decision Wheel</h1>
+          <p className="text-muted-foreground mt-2">Spin the wheel to make random decisions</p>
         </div>
       
         <nav className="w-full mb-8 glass rounded-xl p-4 flex flex-wrap justify-center gap-4">
@@ -36,7 +36,7 @@ const DiceRollerPage = () => {
           </Link>
           <Link 
             to="/dice-roller" 
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+            className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
             <Dice3 size={18} />
             <span>Dice Roller</span>
@@ -50,7 +50,7 @@ const DiceRollerPage = () => {
           </Link>
           <Link 
             to="/decision-wheel" 
-            className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
           >
             <RadialFilter size={18} />
             <span>Decision Wheel</span>
@@ -58,9 +58,9 @@ const DiceRollerPage = () => {
         </nav>
       </div>
       
-      <DiceRoller />
+      <DecisionWheel />
     </div>
   );
 };
 
-export default DiceRollerPage;
+export default DecisionWheelPage;

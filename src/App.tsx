@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NamePicker from "./pages/NamePicker";
 import DiceRoller from "./pages/DiceRoller";
+import CoinFlip from "./pages/CoinFlip";
+import DecisionWheel from "./pages/DecisionWheel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/name-picker" element={<NamePicker />} />
           <Route path="/dice-roller" element={<DiceRoller />} />
+          <Route path="/coin-flip" element={<CoinFlip />} />
+          <Route path="/decision-wheel" element={<DecisionWheel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
