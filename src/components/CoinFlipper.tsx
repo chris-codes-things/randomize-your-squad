@@ -10,25 +10,36 @@ const CoinFlipper: React.FC = () => {
   const [isFlipping, setIsFlipping] = useState(false);
   
   const flipCoins = () => {
+    if (coinCount < 1 || coinCount > 10) {
+      toast.error('Please choose between 1 and 10 coins');
+      return;
+    }
+    
     setIsFlipping(true);
     
-    // First show animation
-    const animationFlips: ('heads' | 'tails')[] = [];
-    for (let i = 0; i < coinCount; i++) {
-      animationFlips.push(Math.random() < 0.5 ? 'heads' : 'tails');
-    }
-    setFlippedCoins(animationFlips);
-    
-    // Then after a delay, show final results
-    setTimeout(() => {
-      const results: ('heads' | 'tails')[] = [];
+    // Simulate coin flipping with multiple animation frames
+    let count = 0;
+    const interval = setInterval(() => {
+      const animationFlips: ('heads' | 'tails')[] = [];
       for (let i = 0; i < coinCount; i++) {
-        results.push(Math.random() < 0.5 ? 'heads' : 'tails');
+        animationFlips.push(Math.random() < 0.5 ? 'heads' : 'tails');
       }
-      setFlippedCoins(results);
-      setIsFlipping(false);
-      toast.success('Coins flipped!');
-    }, 800);
+      setFlippedCoins(animationFlips);
+      count++;
+      
+      if (count > 8) {
+        clearInterval(interval);
+        
+        // Final result
+        const results: ('heads' | 'tails')[] = [];
+        for (let i = 0; i < coinCount; i++) {
+          results.push(Math.random() < 0.5 ? 'heads' : 'tails');
+        }
+        setFlippedCoins(results);
+        setIsFlipping(false);
+        toast.success('Coins flipped!');
+      }
+    }, 150);
   };
   
   const getTotals = () => {
@@ -59,9 +70,9 @@ const CoinFlipper: React.FC = () => {
                 <input
                   type="number"
                   min="1"
-                  max="100"
+                  max="10"
                   value={coinCount}
-                  onChange={(e) => setCoinCount(Math.min(100, Math.max(1, parseInt(e.target.value) || 1)))}
+                  onChange={(e) => setCoinCount(Math.min(10, Math.max(1, parseInt(e.target.value) || 1)))}
                   className="w-full p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
                 />
               </div>
@@ -87,11 +98,28 @@ const CoinFlipper: React.FC = () => {
           <div className="glass rounded-2xl p-6">
             <h2 className="text-xl font-medium mb-4 text-primary">Results</h2>
             
-            {coinCount > 5 ? (
-              <div className="mb-6 text-center">
-                <div className="text-3xl font-bold mb-4">
-                  {headsCount} Heads • {tailsCount} Tails
+            <div className="flex flex-wrap justify-center gap-4 my-6">
+              {flippedCoins.map((result, index) => (
+                <div 
+                  key={index} 
+                  className={`relative w-20 h-20 rounded-full flex items-center justify-center shadow-md 
+                             ${isFlipping ? 'animate-bounce-light' : ''}
+                             ${result === 'heads' ? 'bg-primary text-white' : 'bg-white/80 text-foreground'}`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="font-bold text-2xl">
+                    {result === 'heads' ? 'H' : 'T'}
+                  </div>
                 </div>
+              ))}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <div className="text-2xl font-bold mb-4">
+                {headsCount} Heads • {tailsCount} Tails
+              </div>
+              
+              {coinCount > 1 && (
                 <div className="w-full bg-white/30 h-8 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-primary flex items-center justify-center text-white font-medium"
@@ -100,26 +128,8 @@ const CoinFlipper: React.FC = () => {
                     {flippedCoins.length > 0 && `${Math.round((headsCount / flippedCoins.length) * 100)}%`}
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-4">
-                {flippedCoins.map((result, index) => (
-                  <div 
-                    key={index} 
-                    className={`aspect-square rounded-full flex items-center justify-center font-bold text-lg
-                              ${result === 'heads' ? 'bg-primary text-white' : 'bg-white/80 text-foreground'}`}
-                  >
-                    {result === 'heads' ? 'H' : 'T'}
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            {coinCount > 1 && coinCount <= 5 && (
-              <div className="text-center text-muted-foreground">
-                {headsCount} Heads • {tailsCount} Tails
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}
