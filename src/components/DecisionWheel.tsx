@@ -113,36 +113,65 @@ const DecisionWheel: React.FC = () => {
             transition: isSpinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.15, 0.99)' : 'none'
           }}
         >
-          {optionsArray.map((option, index) => (
-            <div 
-              key={index}
-              className="absolute w-1/2 h-1/2 origin-bottom-right flex justify-center items-start pt-2"
-              style={{ 
-                backgroundColor: colors[index],
-                transform: `rotate(${index * segmentAngle}deg)`,
-                transformOrigin: '0% 100%',
-                left: '50%',
-                top: '0%',
-                width: '50%',
-                height: '50%',
-                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                zIndex: optionsArray.length - index
-              }}
-            >
+          {optionsArray.map((option, index) => {
+            // Calculate the exact angle for this segment
+            const startAngle = index * segmentAngle;
+            const endAngle = (index + 1) * segmentAngle;
+            
+            // Return the segment
+            return (
               <div 
-                className="transform -rotate-90 text-white text-xs md:text-sm font-medium truncate max-w-[80px]"
+                key={index}
+                className="absolute overflow-hidden"
                 style={{ 
-                  transform: `rotate(${90 - segmentAngle/2}deg)`, 
-                  marginTop: '30%', 
-                  marginLeft: '-40%'
+                  top: '0',
+                  left: '0',
+                  width: '100%', 
+                  height: '100%',
+                  transform: `rotate(${startAngle}deg)`,
+                  transformOrigin: 'center'
                 }}
               >
-                {option}
+                <div 
+                  style={{
+                    backgroundColor: colors[index],
+                    position: 'absolute',
+                    width: '50%',
+                    height: '100%',
+                    right: '0',
+                    transformOrigin: 'left center',
+                    transform: `rotate(${segmentAngle / 2}deg)`,
+                    clipPath: optionsArray.length === 2 
+                      ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' 
+                      : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                    zIndex: optionsArray.length - index
+                  }}
+                >
+                  <div 
+                    className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+                    style={{
+                      transform: `rotate(${90 - segmentAngle / 2}deg) translateX(${optionsArray.length > 6 ? '30%' : '40%'})`,
+                    }}
+                  >
+                    <div 
+                      className="text-white font-medium text-center whitespace-nowrap"
+                      style={{
+                        fontSize: optionsArray.length > 8 ? '0.6rem' : optionsArray.length > 5 ? '0.7rem' : '0.85rem',
+                        maxWidth: '80px',
+                        transform: `rotate(${optionsArray.length === 2 ? 0 : 90}deg)`
+                      }}
+                    >
+                      {option}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-          <div className="absolute inset-0 rounded-full border-4 border-white/60"></div>
-          <div className="absolute left-1/2 top-1/2 w-5 h-5 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            );
+          })}
+          
+          {/* Center dot and border */}
+          <div className="absolute inset-0 rounded-full border-4 border-white/60 pointer-events-none"></div>
+          <div className="absolute left-1/2 top-1/2 w-5 h-5 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
         </div>
       </div>
     );
