@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import DecisionWheel from '../components/DecisionWheel';
-import { Users, User, Dice3, Coins, CircleDashed } from 'lucide-react';
+import { Users, User, Dice3, Coins, CircleDashed, School, Utensils, Gamepad2, ClipboardList } from 'lucide-react';
 
 const DecisionWheelPage = () => {
   return (
@@ -84,21 +83,33 @@ const DecisionWheelPage = () => {
         
         <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-2">Popular Uses for Our Decision Wheel</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Classroom Activities</h4>
-            <p className="text-sm">Randomly select students for participation, assign topics, or choose activities in a fun way.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <School className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Classroom Activities</h4>
+              <p className="text-sm">Randomly select students for participation, assign topics, or choose activities in a fun way.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Restaurant & Food Choices</h4>
-            <p className="text-sm">Can't decide where to eat or what to cook? Let the wheel decide between your options.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Utensils className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Restaurant & Food Choices</h4>
+              <p className="text-sm">Can't decide where to eat or what to cook? Let the wheel decide between your options.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Games & Entertainment</h4>
-            <p className="text-sm">Use for party games, selecting random challenges, or creating a game show atmosphere.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Gamepad2 className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Games & Entertainment</h4>
+              <p className="text-sm">Use for party games, selecting random challenges, or creating a game show atmosphere.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Chore Assignment</h4>
-            <p className="text-sm">Fairly distribute household chores or tasks among family members or roommates.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <ClipboardList className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Chore Assignment</h4>
+              <p className="text-sm">Fairly distribute household chores or tasks among family members or roommates.</p>
+            </div>
           </div>
         </div>
         

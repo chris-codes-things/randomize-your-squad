@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import TeamGenerator from '../components/TeamGenerator';
-import { Users, User, Dice3, Coins, CircleDashed } from 'lucide-react';
+import { Users, User, Dice3, Coins, CircleDashed, GraduationCap, Dumbbell, Briefcase, PartyPopper } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -76,21 +75,33 @@ const Index = () => {
         
         <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-2">Common Uses for Our Team Generator</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Education</h4>
-            <p className="text-sm">Create balanced student groups for projects, activities, labs, or classroom games.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <GraduationCap className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Education</h4>
+              <p className="text-sm">Create balanced student groups for projects, activities, labs, or classroom games.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Sports &amp; Recreation</h4>
-            <p className="text-sm">Form fair teams for pickup games, recreational leagues, or training sessions.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Dumbbell className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Sports &amp; Recreation</h4>
+              <p className="text-sm">Form fair teams for pickup games, recreational leagues, or training sessions.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Workplace</h4>
-            <p className="text-sm">Divide employees for team-building exercises, brainstorming sessions, or company events.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Briefcase className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Workplace</h4>
+              <p className="text-sm">Divide employees for team-building exercises, brainstorming sessions, or company events.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Social Events</h4>
-            <p className="text-sm">Create balanced teams for parties, family gatherings, or friendly competitions.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <PartyPopper className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Social Events</h4>
+              <p className="text-sm">Create balanced teams for parties, family gatherings, or friendly competitions.</p>
+            </div>
           </div>
         </div>
         

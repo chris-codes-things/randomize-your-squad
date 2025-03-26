@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import CoinFlipper from '../components/CoinFlipper';
-import { Users, User, Dice3, Coins, CircleDashed } from 'lucide-react';
+import { Users, User, Dice3, Coins, CircleDashed, Zap, Trophy, Calculator, Scale } from 'lucide-react';
 
 const CoinFlipPage = () => {
   return (
@@ -84,21 +83,33 @@ const CoinFlipPage = () => {
         
         <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-2">When to Use a Coin Flip</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Quick Decisions</h4>
-            <p className="text-sm">Can't decide between two options? Let the coin decide to save time and avoid decision fatigue.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Zap className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Quick Decisions</h4>
+              <p className="text-sm">Can't decide between two options? Let the coin decide to save time and avoid decision fatigue.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Sports & Games</h4>
-            <p className="text-sm">Determine who goes first in games or sports matches with a fair coin toss.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Trophy className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Sports & Games</h4>
+              <p className="text-sm">Determine who goes first in games or sports matches with a fair coin toss.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Teaching Probability</h4>
-            <p className="text-sm">Demonstrate probability concepts by flipping multiple coins and tracking the results.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Calculator className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Teaching Probability</h4>
+              <p className="text-sm">Demonstrate probability concepts by flipping multiple coins and tracking the results.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Breaking Ties</h4>
-            <p className="text-sm">Use a neutral coin flip to resolve disputes or break tied votes fairly.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Scale className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Breaking Ties</h4>
+              <p className="text-sm">Use a neutral coin flip to resolve disputes or break tied votes fairly.</p>
+            </div>
           </div>
         </div>
         

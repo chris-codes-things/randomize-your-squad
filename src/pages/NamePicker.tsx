@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import RandomNumberGenerator from '../components/RandomNumberGenerator';
-import { Users, User, Dice3, Coins, CircleDashed } from 'lucide-react';
+import { Users, User, Dice3, Coins, CircleDashed, Ticket, BarChartBig, Pencil, Shuffle } from 'lucide-react';
 
 const RandomNumberPage = () => {
   return (
@@ -81,21 +80,33 @@ const RandomNumberPage = () => {
         
         <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-2">Common Uses for Random Numbers</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Lottery & Games</h4>
-            <p className="text-sm">Generate random lottery numbers, raffle selections, or game inputs without bias.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Ticket className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Lottery & Games</h4>
+              <p className="text-sm">Generate random lottery numbers, raffle selections, or game inputs without bias.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Statistics & Sampling</h4>
-            <p className="text-sm">Create random samples for surveys, research, or statistical analysis.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <BarChartBig className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Statistics & Sampling</h4>
+              <p className="text-sm">Create random samples for surveys, research, or statistical analysis.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Education</h4>
-            <p className="text-sm">Randomly select students for activities, assign random problems, or create math exercises.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Pencil className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Education</h4>
+              <p className="text-sm">Randomly select students for activities, assign random problems, or create math exercises.</p>
+            </div>
           </div>
-          <div className="p-4 bg-white/50 rounded-lg">
-            <h4 className="font-medium text-primary">Decision Making</h4>
-            <p className="text-sm">Use random numbers to make unbiased selections or choices between options.</p>
+          <div className="p-4 bg-white/50 rounded-lg flex items-start gap-3 transition-all hover:bg-white/70">
+            <Shuffle className="text-primary mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <h4 className="font-medium text-primary">Decision Making</h4>
+              <p className="text-sm">Use random numbers to make unbiased selections or choices between options.</p>
+            </div>
           </div>
         </div>
         
