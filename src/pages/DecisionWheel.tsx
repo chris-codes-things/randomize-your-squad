@@ -11,6 +11,15 @@ const DecisionWheelPage = () => {
       <Helmet>
         <title>Decision Wheel - Free Online Random Choice Picker Tool</title>
         <meta name="description" content="Free decision wheel tool. Randomly select from your options for fair decision making. Simple, free, and mobile-friendly wheel of fortune style picker." />
+        <meta name="keywords" content="decision wheel, random picker, spin wheel, wheel of names, random choice maker, random decision, choice spinner, decision maker" />
+        <link rel="canonical" href="https://teamrandomizer.com/decision-wheel" />
+        <meta property="og:title" content="Decision Wheel - Free Online Random Choice Picker Tool" />
+        <meta property="og:description" content="Randomly select from your options for fair decision making. Simple wheel of fortune style decision tool." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://teamrandomizer.com/decision-wheel" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Decision Wheel - Free Online Random Choice Picker Tool" />
+        <meta name="twitter:description" content="Spin the wheel to make random decisions between multiple options." />
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">
@@ -32,7 +41,7 @@ const DecisionWheelPage = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
             <User size={18} />
-            <span>Name Picker</span>
+            <span>Number Generator</span>
           </Link>
           <Link 
             to="/dice-roller" 

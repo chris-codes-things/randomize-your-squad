@@ -7,6 +7,7 @@ const DiceRoller: React.FC = () => {
   const [diceCount, setDiceCount] = useState(1);
   const [diceResults, setDiceResults] = useState<number[]>([]);
   const [isRolling, setIsRolling] = useState(false);
+  const [showTotal, setShowTotal] = useState(false);
   
   const getDiceIcon = (value: number) => {
     switch (value) {
@@ -27,6 +28,7 @@ const DiceRoller: React.FC = () => {
     }
 
     setIsRolling(true);
+    setShowTotal(false);
     
     // Simulate dice rolling for 1.5 seconds
     let count = 0;
@@ -38,6 +40,7 @@ const DiceRoller: React.FC = () => {
       if (count > 8) {
         clearInterval(interval);
         setIsRolling(false);
+        setShowTotal(true);
         toast.success('Dice rolled!');
       }
     }, 150);
@@ -114,7 +117,7 @@ const DiceRoller: React.FC = () => {
               ))}
             </div>
             
-            {diceResults.length > 1 && (
+            {diceResults.length > 1 && showTotal && (
               <div className="mt-6 text-lg font-semibold">
                 Total: {diceResults.reduce((sum, val) => sum + val, 0)}
               </div>

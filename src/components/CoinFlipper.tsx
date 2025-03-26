@@ -8,6 +8,7 @@ const CoinFlipper: React.FC = () => {
   const [coinCount, setCoinCount] = useState<number>(1);
   const [flippedCoins, setFlippedCoins] = useState<('heads' | 'tails')[]>([]);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   
   const flipCoins = () => {
     if (coinCount < 1 || coinCount > 10) {
@@ -16,6 +17,7 @@ const CoinFlipper: React.FC = () => {
     }
     
     setIsFlipping(true);
+    setShowResults(false);
     
     // Simulate coin flipping with multiple animation frames
     let count = 0;
@@ -37,6 +39,7 @@ const CoinFlipper: React.FC = () => {
         }
         setFlippedCoins(results);
         setIsFlipping(false);
+        setShowResults(true);
         toast.success('Coins flipped!');
       }
     }, 150);
@@ -119,7 +122,7 @@ const CoinFlipper: React.FC = () => {
                 {headsCount} Heads • {tailsCount} Tails
               </div>
               
-              {coinCount > 1 && (
+              {coinCount > 1 && showResults && (
                 <div className="w-full bg-white/30 h-8 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-primary flex items-center justify-center text-white font-medium"

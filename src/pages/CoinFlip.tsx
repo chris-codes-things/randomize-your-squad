@@ -11,6 +11,15 @@ const CoinFlipPage = () => {
       <Helmet>
         <title>Virtual Coin Flip - Free Online Coin Toss Tool</title>
         <meta name="description" content="Free virtual coin flip tool. Flip a virtual coin for making quick decisions or settling disputes. Simple, free, and mobile-friendly." />
+        <meta name="keywords" content="coin flip, coin toss, heads or tails, virtual coin, online coin flip, random coin, coin flipper, decision coin" />
+        <link rel="canonical" href="https://teamrandomizer.com/coin-flip" />
+        <meta property="og:title" content="Virtual Coin Flip - Free Online Coin Toss Tool" />
+        <meta property="og:description" content="Flip a virtual coin for making quick decisions or settling disputes. Simple, free, and mobile-friendly coin flipper." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://teamrandomizer.com/coin-flip" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Virtual Coin Flip - Free Online Coin Toss Tool" />
+        <meta name="twitter:description" content="Flip a virtual coin for making quick decisions." />
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">
@@ -32,7 +41,7 @@ const CoinFlipPage = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
             <User size={18} />
-            <span>Name Picker</span>
+            <span>Number Generator</span>
           </Link>
           <Link 
             to="/dice-roller" 

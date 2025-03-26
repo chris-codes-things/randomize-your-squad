@@ -116,7 +116,6 @@ const DecisionWheel: React.FC = () => {
           {optionsArray.map((option, index) => {
             // Calculate the exact angle for this segment
             const startAngle = index * segmentAngle;
-            const endAngle = (index + 1) * segmentAngle;
             
             // Return the segment
             return (
@@ -140,25 +139,30 @@ const DecisionWheel: React.FC = () => {
                     height: '100%',
                     right: '0',
                     transformOrigin: 'left center',
-                    transform: `rotate(${segmentAngle / 2}deg)`,
-                    clipPath: optionsArray.length === 2 
-                      ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' 
-                      : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                    transform: segmentAngle === 180 ? 'none' : `rotate(${segmentAngle / 2}deg)`,
+                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
                     zIndex: optionsArray.length - index
                   }}
                 >
                   <div 
                     className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
                     style={{
-                      transform: `rotate(${90 - segmentAngle / 2}deg) translateX(${optionsArray.length > 6 ? '30%' : '40%'})`,
+                      transform: `rotate(${90 - segmentAngle / 2}deg) translateY(-50%)`,
+                      top: '50%',
+                      width: '150%',
+                      left: optionsArray.length <= 2 ? '40%' : 
+                             optionsArray.length <= 4 ? '30%' : 
+                             optionsArray.length <= 6 ? '25%' : '20%',
                     }}
                   >
                     <div 
-                      className="text-white font-medium text-center whitespace-nowrap"
+                      className="text-white font-medium text-center whitespace-nowrap overflow-hidden text-ellipsis"
                       style={{
-                        fontSize: optionsArray.length > 8 ? '0.6rem' : optionsArray.length > 5 ? '0.7rem' : '0.85rem',
-                        maxWidth: '80px',
-                        transform: `rotate(${optionsArray.length === 2 ? 0 : 90}deg)`
+                        fontSize: optionsArray.length > 8 ? '0.6rem' : 
+                                optionsArray.length > 5 ? '0.7rem' : '0.85rem',
+                        maxWidth: optionsArray.length <= 3 ? '100px' : 
+                                 optionsArray.length <= 6 ? '80px' : '60px',
+                        transform: optionsArray.length === 2 ? 'rotate(90deg)' : 'none',
                       }}
                     >
                       {option}

@@ -11,6 +11,12 @@ const RandomNumberPage = () => {
       <Helmet>
         <title>Random Number Generator - Free Online Random Number Tool</title>
         <meta name="description" content="Free random number generator tool. Generate random numbers within a custom range with options for unique numbers. Simple, free, and mobile-friendly." />
+        <meta name="keywords" content="random number generator, random integer generator, number picker, lottery number generator, unique random numbers, random number tool" />
+        <link rel="canonical" href="https://teamrandomizer.com/name-picker" />
+        <meta property="og:title" content="Random Number Generator - Free Online Random Number Tool" />
+        <meta property="og:description" content="Generate random numbers within a custom range with options for unique numbers. Simple, free, and mobile-friendly." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://teamrandomizer.com/name-picker" />
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">

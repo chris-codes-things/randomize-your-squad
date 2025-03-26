@@ -11,6 +11,15 @@ const DiceRollerPage = () => {
       <Helmet>
         <title>Online Dice Roller - Free Virtual Dice Rolling Tool</title>
         <meta name="description" content="Free online dice roller tool. Roll virtual dice for board games, RPGs, or decision making. Roll up to 10 dice at once. Simple, free, and mobile-friendly." />
+        <meta name="keywords" content="dice roller, virtual dice, online dice, random dice, dice simulator, board game dice, RPG dice roller, d6 dice" />
+        <link rel="canonical" href="https://teamrandomizer.com/dice-roller" />
+        <meta property="og:title" content="Online Dice Roller - Free Virtual Dice Rolling Tool" />
+        <meta property="og:description" content="Roll virtual dice for board games, RPGs, or decision making. Roll up to 10 dice at once. Simple, free, and mobile-friendly." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://teamrandomizer.com/dice-roller" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Online Dice Roller - Free Virtual Dice Rolling Tool" />
+        <meta name="twitter:description" content="Roll virtual dice for board games, RPGs, or decision making." />
       </Helmet>
       
       <div className="w-full max-w-6xl mx-auto px-4 pb-8">
@@ -32,7 +41,7 @@ const DiceRollerPage = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white/70 hover:bg-white/90 rounded-lg text-foreground"
           >
             <User size={18} />
-            <span>Name Picker</span>
+            <span>Number Generator</span>
           </Link>
           <Link 
             to="/dice-roller" 
