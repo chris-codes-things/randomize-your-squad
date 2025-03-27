@@ -1,8 +1,8 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { CircleDashed, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import TeamInput from './TeamInput';
 
 const DecisionWheel: React.FC = () => {
   const [options, setOptions] = useState<string>('');
@@ -183,7 +183,7 @@ const DecisionWheel: React.FC = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 pb-16">
       <div className="flex flex-col lg:flex-row gap-6 mb-10">
-        <div className="w-full lg:w-1/3 animate-slide-up">
+        <div className="w-full lg:w-1/4 animate-slide-up">
           <div className="glass rounded-2xl p-6 h-full flex flex-col">
             <div className="flex items-center mb-4">
               <CircleDashed className="mr-2 h-5 w-5 text-primary" />
@@ -191,9 +191,12 @@ const DecisionWheel: React.FC = () => {
             </div>
             
             <div className="flex-1 mb-4">
-              <TeamInput 
-                names={options} 
-                setNames={setOptions}
+              <textarea
+                value={options}
+                onChange={(e) => setOptions(e.target.value)}
+                className="w-full h-36 p-3 rounded-xl bg-white/50 border border-border input-focus-ring resize-none"
+                placeholder="Option 1, Option 2, Option 3..."
+                aria-label="Options input"
                 instruction="Enter options (one per line or separated by comma)"
               />
             </div>
@@ -209,7 +212,7 @@ const DecisionWheel: React.FC = () => {
           </div>
         </div>
         
-        <div className="w-full lg:w-2/3 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="w-full lg:w-3/4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="glass rounded-2xl p-6 h-full flex flex-col">
             <div className="flex items-center mb-4">
               <CircleDashed className="mr-2 h-5 w-5 text-primary" />

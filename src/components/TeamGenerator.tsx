@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import Header from './Header';
@@ -81,7 +80,13 @@ const TeamGenerator: React.FC = () => {
             <h2 className="card-header !mb-0">Add Names</h2>
           </div>
           <div className="p-6 pt-0">
-            <TeamInput names={names} setNames={setNames} />
+            <textarea
+              value={names}
+              onChange={(e) => setNames(e.target.value)}
+              className="w-full h-36 p-3 rounded-xl bg-white/50 border border-border input-focus-ring resize-none"
+              placeholder="John Doe, Jane Smith, Mark Johnson..."
+              aria-label="Names input"
+            />
           </div>
         </div>
         
