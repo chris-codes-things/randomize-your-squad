@@ -168,7 +168,7 @@ const RandomNumberGenerator: React.FC = () => {
             <Button
               onClick={generateNumbers}
               disabled={isAnimating}
-              className={`w-full sm:w-auto sm:ml-auto sm:block py-3 px-5 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2
+              className={`w-full py-3 px-5 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2
                 ${isAnimating
                   ? 'bg-muted cursor-not-allowed' 
                   : 'bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98]'
