@@ -103,7 +103,7 @@ const RandomNumberGenerator: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 pb-16">
+    <div className="w-full max-w-3xl mx-auto px-4 pb-16">
       <div className="flex flex-col gap-6 mb-10">
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
@@ -135,45 +135,47 @@ const RandomNumberGenerator: React.FC = () => {
               </div>
             </div>
             
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-muted-foreground mb-2">
-                How many numbers to generate? (1-100)
-              </label>
-              <Input
-                type="number"
-                min="1"
-                max="100"
-                value={count}
-                onChange={(e) => setCount(parseInt(e.target.value) || 1)}
-                className="w-full"
-              />
-            </div>
-            
-            <div className="flex items-center space-x-2 mb-6">
-              <Checkbox 
-                id="noRepeats" 
-                checked={noRepeats}
-                onCheckedChange={(checked) => setNoRepeats(checked === true)}
-              />
-              <label 
-                htmlFor="noRepeats" 
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                No repeated numbers
-              </label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
+                  How many numbers to generate? (1-100)
+                </label>
+                <Input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={count}
+                  onChange={(e) => setCount(parseInt(e.target.value) || 1)}
+                  className="w-full"
+                />
+              </div>
+              
+              <div className="flex items-center space-x-2 self-end mb-2">
+                <Checkbox 
+                  id="noRepeats" 
+                  checked={noRepeats}
+                  onCheckedChange={(checked) => setNoRepeats(checked === true)}
+                />
+                <label 
+                  htmlFor="noRepeats" 
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  No repeated numbers
+                </label>
+              </div>
             </div>
             
             <Button
               onClick={generateNumbers}
               disabled={isAnimating}
-              className={`w-full py-4 px-6 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2
+              className={`w-full sm:w-auto sm:ml-auto sm:block py-3 px-5 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2
                 ${isAnimating
                   ? 'bg-muted cursor-not-allowed' 
                   : 'bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98]'
                 }`}
             >
               <Shuffle className={`h-5 w-5 ${isAnimating ? 'animate-spin' : ''}`} />
-              <span>Generate Random Numbers</span>
+              <span>Generate Numbers</span>
             </Button>
           </div>
         </div>

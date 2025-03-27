@@ -22,7 +22,7 @@ const DiceRollerPage = () => {
         <meta name="twitter:description" content="Roll virtual dice for board games, RPGs, or decision making." />
       </Helmet>
       
-      <div className="w-full max-w-6xl mx-auto px-4 pb-8">
+      <div className="w-full max-w-3xl mx-auto px-4 pb-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary">Virtual Dice Roller</h1>
           <p className="text-muted-foreground mt-2">Roll virtual dice for games, decisions, or random numbers</p>
@@ -69,7 +69,7 @@ const DiceRollerPage = () => {
       
       <DiceRoller />
 
-      <div className="w-full max-w-6xl mx-auto px-4 py-10">
+      <div className="w-full max-w-3xl mx-auto px-4 py-10">
         <div className="bg-white/80 backdrop-blur-sm rounded-xl px-6 py-10 shadow-sm">
           <h2 className="text-2xl font-bold text-primary mb-4">About Our Virtual Dice Roller</h2>
           <p className="mb-4">Our free online dice roller lets you roll virtual dice for board games, tabletop RPGs, or any situation where you need random numbers. With customizable dice count and realistic animations, it's the perfect substitute for physical dice.</p>

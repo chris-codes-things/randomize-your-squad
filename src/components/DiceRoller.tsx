@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from 'lucide-react';
@@ -30,7 +29,6 @@ const DiceRoller: React.FC = () => {
     setIsRolling(true);
     setShowTotal(false);
     
-    // Simulate dice rolling for 1.5 seconds
     let count = 0;
     const interval = setInterval(() => {
       const results = Array(diceCount).fill(0).map(() => Math.floor(Math.random() * 6) + 1);
@@ -63,39 +61,44 @@ const DiceRoller: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 pb-16">
+    <div className="w-full max-w-3xl mx-auto px-4 pb-16">
       <div className="flex flex-col gap-6 mb-10">
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
             <h2 className="card-header">Dice Settings</h2>
             
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-              <div className="w-full sm:w-40">
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <div className="w-full max-w-xs">
                 <label htmlFor="diceCount" className="block text-sm font-medium text-muted-foreground mb-2">
                   Number of Dice
                 </label>
-                <input
-                  id="diceCount"
-                  type="number"
-                  min="1"
-                  max="10"
-                  value={diceCount}
-                  onChange={handleDiceCountChange}
-                  className="w-full p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
-                  aria-label="Number of dice"
-                />
+                <div className="flex items-center gap-4">
+                  <input
+                    id="diceCount"
+                    type="number"
+                    min="1"
+                    max="10"
+                    value={diceCount}
+                    onChange={handleDiceCountChange}
+                    className="w-24 p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
+                    aria-label="Number of dice"
+                  />
+                  <span className="text-muted-foreground">
+                    {diceCount === 1 ? 'die' : 'dice'}
+                  </span>
+                </div>
               </div>
+              
+              <button
+                onClick={rollDice}
+                className="py-3 px-5 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2 bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98]"
+                aria-label="Roll dice"
+                disabled={isRolling}
+              >
+                <Dice3 className="h-5 w-5" />
+                <span>Roll {diceCount > 1 ? 'Dice' : 'Die'}</span>
+              </button>
             </div>
-            
-            <button
-              onClick={rollDice}
-              className="w-full py-4 px-6 rounded-xl text-white font-medium flex items-center justify-center transition-all duration-300 gap-2 bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98]"
-              aria-label="Roll dice"
-              disabled={isRolling}
-            >
-              <Dice3 className="h-5 w-5" />
-              <span>Roll {diceCount > 1 ? 'Dice' : 'Die'}</span>
-            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Coins, RotateCw } from 'lucide-react';
@@ -19,7 +18,6 @@ const CoinFlipper: React.FC = () => {
     setIsFlipping(true);
     setShowResults(false);
     
-    // Simulate coin flipping with multiple animation frames
     let count = 0;
     const interval = setInterval(() => {
       const animationFlips: ('heads' | 'tails')[] = [];
@@ -32,7 +30,6 @@ const CoinFlipper: React.FC = () => {
       if (count > 8) {
         clearInterval(interval);
         
-        // Final result
         const results: ('heads' | 'tails')[] = [];
         for (let i = 0; i < coinCount; i++) {
           results.push(Math.random() < 0.5 ? 'heads' : 'tails');
@@ -55,7 +52,7 @@ const CoinFlipper: React.FC = () => {
   const { headsCount, tailsCount } = getTotals();
   
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 pb-16">
+    <div className="w-full max-w-3xl mx-auto px-4 pb-16">
       <div className="flex flex-col gap-6 mb-10">
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
@@ -68,29 +65,27 @@ const CoinFlipper: React.FC = () => {
               Select how many coins to flip at once
             </div>
             
-            <div className="flex gap-4 items-center">
-              <div className="w-32">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
                 <input
                   type="number"
                   min="1"
                   max="10"
                   value={coinCount}
                   onChange={(e) => setCoinCount(Math.min(10, Math.max(1, parseInt(e.target.value) || 1)))}
-                  className="w-full p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
+                  className="w-20 p-3 rounded-xl bg-white/50 border border-border input-focus-ring"
                 />
+                <span className="text-muted-foreground">coin{coinCount !== 1 ? 's' : ''}</span>
               </div>
-              <span className="text-muted-foreground">coin{coinCount !== 1 ? 's' : ''}</span>
               
-              <div className="ml-auto">
-                <Button
-                  onClick={flipCoins}
-                  disabled={isFlipping}
-                  className="bg-primary hover:bg-primary/90 text-white px-5 py-3 rounded-xl flex items-center gap-2"
-                >
-                  <RotateCw className={`h-5 w-5 ${isFlipping ? 'animate-spin' : ''}`} />
-                  <span>Flip {coinCount > 1 ? 'Coins' : 'Coin'}</span>
-                </Button>
-              </div>
+              <Button
+                onClick={flipCoins}
+                disabled={isFlipping}
+                className="bg-primary hover:bg-primary/90 text-white px-5 py-3 rounded-xl flex items-center gap-2"
+              >
+                <RotateCw className={`h-5 w-5 ${isFlipping ? 'animate-spin' : ''}`} />
+                <span>Flip {coinCount > 1 ? 'Coins' : 'Coin'}</span>
+              </Button>
             </div>
           </div>
         </div>
