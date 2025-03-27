@@ -60,9 +60,14 @@ const CoinFlipper: React.FC = () => {
         
         // Scroll to show both controls and results
         setTimeout(() => {
-          if (resultsRef.current) {
+          if (resultsRef.current && controlsRef.current) {
+            const controlsHeight = controlsRef.current.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const resultsTop = resultsRef.current.getBoundingClientRect().top + window.pageYOffset;
+            
+            // Scroll to a position that shows both controls and results
             window.scrollTo({
-              top: resultsRef.current.offsetTop - 20,
+              top: resultsTop - controlsHeight - 20,
               behavior: 'smooth'
             });
           }

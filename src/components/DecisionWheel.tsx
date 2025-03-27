@@ -58,7 +58,7 @@ const DecisionWheel: React.FC = () => {
       const optionIndex = Math.floor(((360 - normalizedAngle) % 360) / (360 / optionsArray.length));
       
       setSelectedOption(optionsArray[optionIndex % optionsArray.length]);
-      setIsSpinning(false);
+      setIsFlipping(false);
       toast.success('Decision made!');
     }, 3000); // Match this with CSS duration
   };
@@ -91,7 +91,7 @@ const DecisionWheel: React.FC = () => {
     const segmentAngle = 360 / optionsArray.length;
     
     return (
-      <div className="relative w-full max-w-sm mx-auto aspect-square">
+      <div className="relative w-full max-w-md mx-auto aspect-square">
         {/* Triangle marker at top */}
         <div 
           className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
@@ -184,14 +184,21 @@ const DecisionWheel: React.FC = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 pb-16">
       <div className="flex flex-col lg:flex-row gap-6 mb-10">
-        <div className="w-full lg:w-1/2 animate-slide-up">
-          <TeamInput 
-            names={options} 
-            setNames={setOptions}
-            instruction="Enter options (one per line or separated by comma)"
-          />
-          
-          <div className="mt-4 glass rounded-2xl p-6">
+        <div className="w-full lg:w-1/3 animate-slide-up">
+          <div className="glass rounded-2xl p-6 h-full flex flex-col">
+            <div className="flex items-center mb-4">
+              <CircleDashed className="mr-2 h-5 w-5 text-primary" />
+              <h2 className="card-header !mb-0">Add Options</h2>
+            </div>
+            
+            <div className="flex-1 mb-4">
+              <TeamInput 
+                names={options} 
+                setNames={setOptions}
+                instruction="Enter options (one per line or separated by comma)"
+              />
+            </div>
+            
             <Button
               onClick={spinWheel}
               disabled={optionsArray.length < 2 || isSpinning}
@@ -203,7 +210,7 @@ const DecisionWheel: React.FC = () => {
           </div>
         </div>
         
-        <div className="w-full lg:w-1/2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="w-full lg:w-2/3 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="glass rounded-2xl p-6 h-full flex flex-col">
             <div className="flex items-center mb-4">
               <CircleDashed className="mr-2 h-5 w-5 text-primary" />

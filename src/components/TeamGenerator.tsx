@@ -5,6 +5,7 @@ import Header from './Header';
 import TeamInput from './TeamInput';
 import TeamControls from './TeamControls';
 import TeamResults from './TeamResults';
+import { Users, Settings } from 'lucide-react';
 
 const TeamGenerator: React.FC = () => {
   const [names, setNames] = useState<string>('');
@@ -74,15 +75,31 @@ const TeamGenerator: React.FC = () => {
       <Header />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <TeamInput names={names} setNames={setNames} />
+        <div className="glass rounded-2xl h-full">
+          <div className="flex items-center mb-4 p-6 pb-0">
+            <Users className="mr-2 h-5 w-5 text-primary" />
+            <h2 className="card-header !mb-0">Add Names</h2>
+          </div>
+          <div className="p-6 pt-0">
+            <TeamInput names={names} setNames={setNames} />
+          </div>
+        </div>
         
-        <TeamControls 
-          teamCount={teamCount}
-          setTeamCount={setTeamCount}
-          onRandomize={randomizeTeams}
-          isDisabled={namesArray.length < 2}
-          namesCount={namesArray.length}
-        />
+        <div className="glass rounded-2xl h-full">
+          <div className="flex items-center mb-4 p-6 pb-0">
+            <Settings className="mr-2 h-5 w-5 text-primary" />
+            <h2 className="card-header !mb-0">Team Settings</h2>
+          </div>
+          <div className="p-6 pt-0">
+            <TeamControls 
+              teamCount={teamCount}
+              setTeamCount={setTeamCount}
+              onRandomize={randomizeTeams}
+              isDisabled={namesArray.length < 2}
+              namesCount={namesArray.length}
+            />
+          </div>
+        </div>
       </div>
       
       <div id="results" className="mt-8">
