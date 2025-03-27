@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { CircleDashed, RotateCw } from 'lucide-react';
@@ -58,7 +57,7 @@ const DecisionWheel: React.FC = () => {
       const optionIndex = Math.floor(((360 - normalizedAngle) % 360) / (360 / optionsArray.length));
       
       setSelectedOption(optionsArray[optionIndex % optionsArray.length]);
-      setIsFlipping(false);
+      setIsSpinning(false);
       toast.success('Decision made!');
     }, 3000); // Match this with CSS duration
   };
