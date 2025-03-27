@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import { Shuffle, CheckSquare } from 'lucide-react';
+import { Shuffle, CheckSquare, Hash } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -11,6 +11,7 @@ const RandomNumberGenerator: React.FC = () => {
   const [maxNumber, setMaxNumber] = useState<number>(100);
   const [count, setCount] = useState<number>(1);
   const [noRepeats, setNoRepeats] = useState<boolean>(false);
+  const [showRanking, setShowRanking] = useState<boolean>(true);
   const [generatedNumbers, setGeneratedNumbers] = useState<number[]>([]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
@@ -107,7 +108,10 @@ const RandomNumberGenerator: React.FC = () => {
       <div className="flex flex-col gap-6 mb-10">
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
-            <h2 className="card-header">Random Number Generator</h2>
+            <div className="flex items-center mb-4">
+              <Hash className="mr-2 h-5 w-5 text-primary" />
+              <h2 className="card-header !mb-0">Random Number Generator</h2>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
@@ -150,18 +154,34 @@ const RandomNumberGenerator: React.FC = () => {
                 />
               </div>
               
-              <div className="flex items-center space-x-2 self-end mb-2">
-                <Checkbox 
-                  id="noRepeats" 
-                  checked={noRepeats}
-                  onCheckedChange={(checked) => setNoRepeats(checked === true)}
-                />
-                <label 
-                  htmlFor="noRepeats" 
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  No repeated numbers
-                </label>
+              <div className="flex flex-col space-y-4 self-end mb-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="noRepeats" 
+                    checked={noRepeats}
+                    onCheckedChange={(checked) => setNoRepeats(checked === true)}
+                  />
+                  <label 
+                    htmlFor="noRepeats" 
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    No repeated numbers
+                  </label>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="showRanking" 
+                    checked={showRanking}
+                    onCheckedChange={(checked) => setShowRanking(checked === true)}
+                  />
+                  <label 
+                    htmlFor="showRanking" 
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Show ranking/order
+                  </label>
+                </div>
               </div>
             </div>
             
@@ -189,13 +209,18 @@ const RandomNumberGenerator: React.FC = () => {
               {generatedNumbers.map((num, index) => (
                 <div
                   key={index}
-                  className={`w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold
+                  className={`relative w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold
                     ${isAnimating 
                       ? 'animate-bounce-light bg-primary/80 text-white'
                       : 'bg-white/90 text-foreground shadow'
                     }`}
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
+                  {showRanking && (
+                    <div className="absolute -top-3 -left-2 bg-primary text-white text-xs w-6 h-6 rounded-full flex items-center justify-center">
+                      {index + 1}
+                    </div>
+                  )}
                   {num}
                 </div>
               ))}

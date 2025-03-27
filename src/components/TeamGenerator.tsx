@@ -73,7 +73,7 @@ const TeamGenerator: React.FC = () => {
     <div className="w-full max-w-6xl mx-auto px-4 pb-16">
       <Header />
       
-      <div className="flex flex-col gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <TeamInput names={names} setNames={setNames} />
         
         <TeamControls 

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
-import { Coins, RotateCw } from 'lucide-react';
+import { Coins, RotateCw, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CoinFlipper: React.FC = () => {
@@ -8,6 +9,24 @@ const CoinFlipper: React.FC = () => {
   const [flippedCoins, setFlippedCoins] = useState<('heads' | 'tails')[]>([]);
   const [isFlipping, setIsFlipping] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const controlsRef = useRef<HTMLDivElement>(null);
+  
+  // Add space bar listener for coin flipping
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && !isFlipping && !e.repeat && 
+          !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        flipCoins();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isFlipping]);
   
   const flipCoins = () => {
     if (coinCount < 1 || coinCount > 10) {
@@ -38,6 +57,16 @@ const CoinFlipper: React.FC = () => {
         setIsFlipping(false);
         setShowResults(true);
         toast.success('Coins flipped!');
+        
+        // Scroll to show both controls and results
+        setTimeout(() => {
+          if (resultsRef.current) {
+            window.scrollTo({
+              top: resultsRef.current.offsetTop - 20,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
       }
     }, 150);
   };
@@ -53,7 +82,7 @@ const CoinFlipper: React.FC = () => {
   
   return (
     <div className="w-full max-w-3xl mx-auto px-4 pb-16">
-      <div className="flex flex-col gap-6 mb-10">
+      <div className="flex flex-col gap-6 mb-10" ref={controlsRef}>
         <div className="w-full animate-slide-up">
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center mb-3">
@@ -65,7 +94,7 @@ const CoinFlipper: React.FC = () => {
               Select how many coins to flip at once
             </div>
             
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-3">
               <div className="flex items-center gap-3">
                 <input
                   type="number"
@@ -81,18 +110,23 @@ const CoinFlipper: React.FC = () => {
               <Button
                 onClick={flipCoins}
                 disabled={isFlipping}
-                className="bg-primary hover:bg-primary/90 text-white px-5 py-3 rounded-xl flex items-center gap-2"
+                className="bg-primary hover:bg-primary/90 text-white px-5 py-3 h-[48px] rounded-xl flex items-center gap-2"
               >
                 <RotateCw className={`h-5 w-5 ${isFlipping ? 'animate-spin' : ''}`} />
                 <span>Flip {coinCount > 1 ? 'Coins' : 'Coin'}</span>
               </Button>
+            </div>
+            
+            <div className="flex items-center gap-1 text-sm text-muted-foreground mt-2">
+              <Info className="h-4 w-4" />
+              <p>Press the space bar to flip coins quickly</p>
             </div>
           </div>
         </div>
       </div>
       
       {flippedCoins.length > 0 && (
-        <div className="animate-slide-up">
+        <div className="animate-slide-up" ref={resultsRef}>
           <div className="glass rounded-2xl p-6">
             <h2 className="text-xl font-medium mb-4 text-primary">Results</h2>
             
@@ -113,9 +147,11 @@ const CoinFlipper: React.FC = () => {
             </div>
             
             <div className="mt-6 text-center">
-              <div className="text-2xl font-bold mb-4">
-                {headsCount} Heads • {tailsCount} Tails
-              </div>
+              {showResults && (
+                <div className="text-2xl font-bold mb-4">
+                  {headsCount} Heads • {tailsCount} Tails
+                </div>
+              )}
               
               {coinCount > 1 && showResults && (
                 <div className="w-full bg-white/30 h-8 rounded-full overflow-hidden">
