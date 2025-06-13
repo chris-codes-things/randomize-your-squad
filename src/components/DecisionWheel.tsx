@@ -184,7 +184,7 @@ const DecisionWheel: React.FC = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 pb-16">
       <div className="flex flex-col lg:flex-row gap-6 mb-10">
-        <div className="w-full lg:w-1/2 animate-slide-up">
+        <div className="w-full lg:w-1/3 animate-slide-up">
           <TeamInput 
             names={options} 
             setNames={setOptions}
@@ -203,7 +203,7 @@ const DecisionWheel: React.FC = () => {
           </div>
         </div>
         
-        <div className="w-full lg:w-1/2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="w-full lg:w-2/3 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="glass rounded-2xl p-6 h-full flex flex-col">
             <div className="flex items-center mb-4">
               <CircleDashed className="mr-2 h-5 w-5 text-primary" />
