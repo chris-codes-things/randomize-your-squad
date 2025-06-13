@@ -6,19 +6,28 @@ interface TeamInputProps {
   names: string;
   setNames: React.Dispatch<React.SetStateAction<string>>;
   instruction?: string;
+  namesCount?: number;
 }
 
 const TeamInput: React.FC<TeamInputProps> = ({ 
   names, 
   setNames,
-  instruction = "Enter names (separated by comma, new line, or space)"
+  instruction = "Enter names (separated by comma, new line, or space)",
+  namesCount
 }) => {
   return (
     <div className="w-full animate-slide-up">
       <div className="glass rounded-2xl p-6">
-        <div className="flex items-center mb-3">
-          <Users className="mr-2 h-5 w-5 text-primary" />
-          <h2 className="card-header !mb-0">Add Names</h2>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center">
+            <Users className="mr-2 h-5 w-5 text-primary" />
+            <h2 className="card-header !mb-0">Add Names</h2>
+          </div>
+          {typeof namesCount === 'number' && (
+            <div className="text-sm text-muted-foreground">
+              {namesCount} {namesCount === 1 ? 'person' : 'people'} added
+            </div>
+          )}
         </div>
         
         <div className="text-sm text-muted-foreground mb-4">

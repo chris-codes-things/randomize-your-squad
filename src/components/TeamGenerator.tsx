@@ -59,14 +59,6 @@ const TeamGenerator: React.FC = () => {
 
     setTeams(result);
     toast.success('Teams randomized successfully!');
-    
-    // Scroll to results after a brief delay
-    setTimeout(() => {
-      const resultsElement = document.getElementById('results');
-      if (resultsElement) {
-        resultsElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
   };
 
   return (
@@ -74,7 +66,11 @@ const TeamGenerator: React.FC = () => {
       <Header />
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <TeamInput names={names} setNames={setNames} />
+        <TeamInput 
+          names={names} 
+          setNames={setNames} 
+          namesCount={namesArray.length}
+        />
         
         <TeamControls 
           teamCount={teamCount}

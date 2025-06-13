@@ -59,16 +59,6 @@ const DiceRoller: React.FC = () => {
         setIsRolling(false);
         setShowTotal(true);
         toast.success('Dice rolled!');
-        
-        // Scroll to show both controls and results
-        setTimeout(() => {
-          if (resultsRef.current) {
-            window.scrollTo({
-              top: resultsRef.current.offsetTop - 20,
-              behavior: 'smooth'
-            });
-          }
-        }, 100);
       }
     }, 150);
   };
