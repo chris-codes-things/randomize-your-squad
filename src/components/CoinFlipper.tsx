@@ -124,9 +124,11 @@ const CoinFlipper: React.FC = () => {
               {flippedCoins.map((result, index) => (
                 <div 
                   key={index} 
-                  className={`relative w-20 h-20 rounded-full flex items-center justify-center shadow-md 
+                  className={`relative w-20 h-20 rounded-full flex items-center justify-center shadow-md border-2
                              ${isFlipping ? 'animate-bounce-light' : ''}
-                             ${result === 'heads' ? 'bg-primary text-white' : 'bg-white/80 text-foreground'}`}
+                             ${result === 'heads' 
+                               ? 'bg-primary text-white border-primary' 
+                               : 'bg-white/80 text-foreground border-border'}`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="font-bold text-2xl">

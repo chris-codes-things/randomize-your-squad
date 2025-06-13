@@ -209,10 +209,10 @@ const RandomNumberGenerator: React.FC = () => {
               {generatedNumbers.map((num, index) => (
                 <div
                   key={index}
-                  className={`relative w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold
+                  className={`relative w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold border-2
                     ${isAnimating 
-                      ? 'animate-bounce-light bg-primary/80 text-white'
-                      : 'bg-white/90 text-foreground shadow'
+                      ? 'animate-bounce-light bg-primary/80 text-white border-primary'
+                      : 'bg-white/90 text-foreground border-border shadow-md'
                     }`}
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >

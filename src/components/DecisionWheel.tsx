@@ -1,36 +1,36 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { CircleDashed, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import TeamInput from './TeamInput';
 
 const DecisionWheel: React.FC = () => {
   const [options, setOptions] = useState<string>('');
   const [optionsArray, setOptionsArray] = useState<string[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [rotationAngle, setRotationAngle] = useState(0);
+  const [rotation, setRotation] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const wheelRef = useRef<HTMLDivElement>(null);
+  const [showWinnerDialog, setShowWinnerDialog] = useState(false);
   
   // Parse options input into array
   useEffect(() => {
-    // First split by new lines and commas
     const splitByLineAndComma = options
       .split(/[\n,]+/)
       .map(part => part.trim())
       .filter(Boolean);
     
-    // Then process each chunk to split by spaces if needed
-    const result: string[] = [];
-    splitByLineAndComma.forEach(chunk => {
-      // If the chunk contains multiple words with spaces between them,
-      // treat it as a single option rather than splitting further
-      if (chunk) result.push(chunk);
-    });
-    
-    setOptionsArray(result);
+    setOptionsArray(splitByLineAndComma);
   }, [options]);
+  
+  const getSegmentColors = () => {
+    const colors = [
+      '#4F46E5', '#7C3AED', '#EC4899', '#F97316', 
+      '#EAB308', '#22C55E', '#06B6D4', '#3B82F6'
+    ];
+    return colors;
+  };
   
   const spinWheel = () => {
     if (optionsArray.length < 2) {
@@ -41,144 +41,25 @@ const DecisionWheel: React.FC = () => {
     setIsSpinning(true);
     setSelectedOption(null);
     
-    // Generate random angle between 2000 and 5000 degrees
-    const spinAngle = 2000 + Math.random() * 3000;
+    // Generate random spins (5-10 full rotations + random angle)
+    const spins = 5 + Math.random() * 5;
+    const finalAngle = Math.random() * 360;
+    const totalRotation = rotation + (spins * 360) + finalAngle;
     
-    // Add to current rotation for continuous spinning
-    const newRotation = rotationAngle + spinAngle;
-    setRotationAngle(newRotation);
+    setRotation(totalRotation);
     
-    // Determine which option is selected
+    // Calculate which option is selected after spin
     setTimeout(() => {
-      // Calculate the final position (reduce to 0-360 degrees)
-      const normalizedAngle = newRotation % 360;
+      const normalizedAngle = (360 - (totalRotation % 360)) % 360;
+      const segmentSize = 360 / optionsArray.length;
+      const selectedIndex = Math.floor(normalizedAngle / segmentSize);
+      const winner = optionsArray[selectedIndex];
       
-      // Calculate which option is at the top (opposite of the rotation point)
-      // Each option takes up (360 / optionsArray.length) degrees
-      const optionIndex = Math.floor(((360 - normalizedAngle) % 360) / (360 / optionsArray.length));
-      
-      setSelectedOption(optionsArray[optionIndex % optionsArray.length]);
+      setSelectedOption(winner);
       setIsSpinning(false);
-      toast.success('Decision made!');
-    }, 3000); // Match this with CSS duration
-  };
-  
-  const getWheelColors = () => {
-    const baseColors = [
-      '#4F46E5', // primary indigo
-      '#7C3AED', // purple
-      '#EC4899', // pink
-      '#F97316', // orange
-      '#EAB308', // yellow
-      '#22C55E', // green
-      '#06B6D4', // cyan
-      '#3B82F6', // blue
-    ];
-    
-    // Repeat colors if needed
-    const colors = [];
-    for (let i = 0; i < optionsArray.length; i++) {
-      colors.push(baseColors[i % baseColors.length]);
-    }
-    
-    return colors;
-  };
-  
-  const renderWheel = () => {
-    if (optionsArray.length === 0) return null;
-    
-    const colors = getWheelColors();
-    const segmentAngle = 360 / optionsArray.length;
-    
-    return (
-      <div className="relative w-full max-w-sm mx-auto aspect-square">
-        {/* Triangle marker at top */}
-        <div 
-          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-          style={{ 
-            width: '0', 
-            height: '0', 
-            borderLeft: '15px solid transparent',
-            borderRight: '15px solid transparent',
-            borderTop: '30px solid #ef4444' 
-          }}
-        />
-        
-        {/* Spinning wheel */}
-        <div 
-          ref={wheelRef}
-          className="w-full h-full rounded-full overflow-hidden relative"
-          style={{ 
-            transform: `rotate(${rotationAngle}deg)`,
-            transition: isSpinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.15, 0.99)' : 'none'
-          }}
-        >
-          {optionsArray.map((option, index) => {
-            // Calculate the exact angle for this segment
-            const startAngle = index * segmentAngle;
-            
-            // Return the segment
-            return (
-              <div 
-                key={index}
-                className="absolute overflow-hidden"
-                style={{ 
-                  top: '0',
-                  left: '0',
-                  width: '100%', 
-                  height: '100%',
-                  transform: `rotate(${startAngle}deg)`,
-                  transformOrigin: 'center'
-                }}
-              >
-                <div 
-                  style={{
-                    backgroundColor: colors[index],
-                    position: 'absolute',
-                    width: '50%',
-                    height: '100%',
-                    right: '0',
-                    transformOrigin: 'left center',
-                    transform: segmentAngle === 180 ? 'none' : `rotate(${segmentAngle / 2}deg)`,
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-                    zIndex: optionsArray.length - index
-                  }}
-                >
-                  <div 
-                    className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
-                    style={{
-                      transform: `rotate(${90 - segmentAngle / 2}deg) translateY(-50%)`,
-                      top: '50%',
-                      width: '150%',
-                      left: optionsArray.length <= 2 ? '40%' : 
-                             optionsArray.length <= 4 ? '30%' : 
-                             optionsArray.length <= 6 ? '25%' : '20%',
-                    }}
-                  >
-                    <div 
-                      className="text-white font-medium text-center whitespace-nowrap overflow-hidden text-ellipsis"
-                      style={{
-                        fontSize: optionsArray.length > 8 ? '0.6rem' : 
-                                optionsArray.length > 5 ? '0.7rem' : '0.85rem',
-                        maxWidth: optionsArray.length <= 3 ? '100px' : 
-                                 optionsArray.length <= 6 ? '80px' : '60px',
-                        transform: optionsArray.length === 2 ? 'rotate(90deg)' : 'none',
-                      }}
-                    >
-                      {option}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-          
-          {/* Center dot and border */}
-          <div className="absolute inset-0 rounded-full border-4 border-white/60 pointer-events-none"></div>
-          <div className="absolute left-1/2 top-1/2 w-5 h-5 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
-        </div>
-      </div>
-    );
+      setShowWinnerDialog(true);
+      toast.success('Wheel has chosen!');
+    }, 3000);
   };
   
   return (
@@ -188,7 +69,7 @@ const DecisionWheel: React.FC = () => {
           <TeamInput 
             names={options} 
             setNames={setOptions}
-            instruction="Enter options (one per line or separated by comma)"
+            instruction="Enter options (separated by comma or new line)"
           />
           
           <div className="mt-4 glass rounded-2xl p-6">
@@ -212,7 +93,75 @@ const DecisionWheel: React.FC = () => {
             
             {optionsArray.length > 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center">
-                {renderWheel()}
+                <div className="relative w-80 h-80">
+                  {/* Pointer */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 z-10">
+                    <div className="w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-red-500"></div>
+                  </div>
+                  
+                  {/* Wheel */}
+                  <div 
+                    className="w-full h-full rounded-full relative overflow-hidden border-4 border-white shadow-lg"
+                    style={{ 
+                      transform: `rotate(${rotation}deg)`,
+                      transition: isSpinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.15, 0.99)' : 'none'
+                    }}
+                  >
+                    <svg className="w-full h-full" viewBox="0 0 200 200">
+                      {optionsArray.map((option, index) => {
+                        const colors = getSegmentColors();
+                        const segmentAngle = 360 / optionsArray.length;
+                        const startAngle = index * segmentAngle;
+                        const endAngle = startAngle + segmentAngle;
+                        
+                        const startAngleRad = (startAngle * Math.PI) / 180;
+                        const endAngleRad = (endAngle * Math.PI) / 180;
+                        
+                        const x1 = 100 + 90 * Math.cos(startAngleRad);
+                        const y1 = 100 + 90 * Math.sin(startAngleRad);
+                        const x2 = 100 + 90 * Math.cos(endAngleRad);
+                        const y2 = 100 + 90 * Math.sin(endAngleRad);
+                        
+                        const largeArcFlag = segmentAngle > 180 ? 1 : 0;
+                        
+                        const pathData = [
+                          `M 100 100`,
+                          `L ${x1} ${y1}`,
+                          `A 90 90 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+                          'Z'
+                        ].join(' ');
+                        
+                        const textAngle = startAngle + segmentAngle / 2;
+                        const textAngleRad = (textAngle * Math.PI) / 180;
+                        const textX = 100 + 60 * Math.cos(textAngleRad);
+                        const textY = 100 + 60 * Math.sin(textAngleRad);
+                        
+                        return (
+                          <g key={index}>
+                            <path
+                              d={pathData}
+                              fill={colors[index % colors.length]}
+                              stroke="white"
+                              strokeWidth="2"
+                            />
+                            <text
+                              x={textX}
+                              y={textY}
+                              fill="white"
+                              fontSize="12"
+                              fontWeight="bold"
+                              textAnchor="middle"
+                              dominantBaseline="middle"
+                              transform={`rotate(${textAngle}, ${textX}, ${textY})`}
+                            >
+                              {option.length > 8 ? option.substring(0, 8) + '...' : option}
+                            </text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="flex-1 flex items-center justify-center text-muted-foreground text-center p-6">
@@ -223,16 +172,23 @@ const DecisionWheel: React.FC = () => {
         </div>
       </div>
       
-      {selectedOption && (
-        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <div className="glass rounded-2xl p-8 text-center">
-            <h2 className="text-xl font-medium mb-4 text-primary">Your Decision</h2>
-            <div className="text-4xl font-bold my-6 text-foreground">
+      <Dialog open={showWinnerDialog} onOpenChange={setShowWinnerDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center text-2xl font-bold text-primary">
+              🎉 Winner! 🎉
+            </DialogTitle>
+            <DialogDescription className="text-center text-lg pt-4">
+              The wheel has chosen:
+            </DialogDescription>
+          </DialogHeader>
+          <div className="text-center py-6">
+            <div className="text-3xl font-bold text-foreground bg-primary/10 rounded-lg py-4 px-6">
               {selectedOption}
             </div>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
